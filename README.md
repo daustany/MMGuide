@@ -66,6 +66,18 @@ A voice challenges the crew with a map analysis task. Given a 2D grid of 1s and 
 
 ---
 
+## 🏗️ Architecture & Design
+
+All projects in this repository follow **SOLID principles** and implement clean architecture patterns to ensure maintainable, extensible, and testable code:
+
+- **Single Responsibility Principle**: Each class has a single, well-defined purpose
+- **Open/Closed Principle**: Classes are open for extension but closed for modification
+- **Liskov Substitution Principle**: Derived classes can replace their base classes
+- **Interface Segregation Principle**: Interfaces are focused and client-specific
+- **Dependency Inversion Principle**: High-level modules don't depend on low-level modules
+
+Each project is structured with clear separation of concerns using interfaces, services, models, and dependency injection patterns. This approach makes the code highly modular and allows for easy testing and future enhancements.
+
 ## 📁 Project Structure
 
 ```
