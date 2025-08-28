@@ -98,9 +98,9 @@ namespace CrewEntered.Services
                     var analysisResult = new AnalysisResult(result, i + 1, result == 1 ? "Valid dependencies" : "Cycle detected");
 
                     #region MY TRACING TEST
-                    //Console.WriteLine($"Line {i + 1:D3}: Result = {result} | {dependencies.Count} dependencies");
+                    // Console.WriteLine($"Line {i + 1:D3}: Result = {result} | {dependencies.Count} dependencies");
 
-                    // Show detailed info for first few lines or cycles
+                    // //Show detailed info for first few lines or cycles
                     // if (i < 5 || result == 0)
                     // {
                     //     Console.WriteLine($"    Dependencies: {string.Join(", ", dependencies)}");
@@ -162,19 +162,35 @@ namespace CrewEntered.Services
         /// </summary>
         /// <param name="dependencies">List of dependency relationships</param>
         /// <returns>Dictionary representing the dependency graph</returns>
+        /// Example 1: [*,<],[<,*]
+        /// Input dependencies after parsing:
+        /// Dependency('*', '<')  // * depends on <
+        /// Dependency('<', '*')  // < depends on *
+        /// BuildDependencyGraph creates:
+        /// graph['*'] = ['<']    * needs < to be pressed first
+        /// graph['<'] = ['*']    < needs * to be pressed first
+        /// Visual Representation For [+,~],[',+],[-,']:
+        /// Dependencies created:
+        /// ~  →  +  →  '  →  -
+        /// ↑     ↑     ↑     ↑
+        /// no    needs needs needs
+        /// deps  ~     +     '
         private Dictionary<char, List<char>> BuildDependencyGraph(List<Dependency> dependencies)
         {
+            // Using dictionary to have an efficient lookup instead of recursive calls
             var graph = new Dictionary<char, List<char>>();
 
             foreach (var dependency in dependencies)
             {
                 // Add dependent symbol to graph if not exists
+                // If 'a' depends on 'b', add 'b' to 'a's dependency list
                 if (!graph.ContainsKey(dependency.Dependent))
                 {
                     graph[dependency.Dependent] = new List<char>();
                 }
 
                 // Add prerequisite as a dependency of the dependent symbol
+                // Make sure 'b' exists in graph (even if it has no dependencies)
                 graph[dependency.Dependent].Add(dependency.Prerequisite);
 
                 // Ensure prerequisite symbol exists in graph (even if it has no dependencies)

@@ -30,11 +30,6 @@ class Program
             string inputFilePath = Path.Combine("Input", "input.txt");
             var result = puzzleSolver.SolvePuzzle(inputFilePath);
 
-            // Display results
-            Console.WriteLine($"Final Result: {result.FinalSum}");
-            Console.WriteLine();
-
-
             // Console.WriteLine("Processing Details:");
             // for (int i = 0; i < result.ProcessingDetails.Count; i++)
             // {
@@ -44,6 +39,10 @@ class Program
             //     Console.WriteLine($"  Median: {detail.Median}");
             //     Console.WriteLine();
             // }
+
+            // Display results
+            Console.WriteLine($"Final Result: {result.FinalSum}");
+            Console.WriteLine();
         }
         catch (Exception ex)
         {

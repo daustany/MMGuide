@@ -29,7 +29,7 @@ public class MedianCalculator : IMedianCalculator
             throw new ArgumentException("Cannot calculate median of empty array", nameof(values));
         }
 
-        // Create a copy to avoid modifying the original array
+        // Create a copy to avoid modifying the original array, because arrays are reference types in C#
         var sortedValues = new int[values.Length];
         Array.Copy(values, sortedValues, values.Length);
         Array.Sort(sortedValues);
