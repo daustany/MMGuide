@@ -48,15 +48,12 @@ public class StoneSplittingCalculator : IStoneSplittingCalculator
         for (int i = 0; i < pilesList.Count; i++)
         {
             var pile = pilesList[i];
-            //Console.WriteLine($"Processing pile {i + 1}/{pilesList.Count}: {pile.InitialSize} stones, {pile.SplittingNumbers.Count} splitting numbers");
 
             var result = _splitCalculator.CalculateMaxSplits(pile);
             results.Add(result);
 
             // Append to final result string
             resultBuilder.Append(result.MaxSplits);
-
-            //Console.WriteLine($"  → Maximum splits: {result.MaxSplits}");
         }
 
         // Step 3: Return concatenated result
