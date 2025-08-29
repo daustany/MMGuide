@@ -8,7 +8,7 @@ namespace ConnectedRegions;
 /// </summary>
 public class Program
 {
-    private const string InputFileName = "Input/input.txt";
+    private const string DefaultInputFileName = "Input/input.txt";
 
     /// <summary>
     /// Main entry point of the application
@@ -26,9 +26,12 @@ public class Program
             IInputReader inputReader = new InputReader();
             IConnectedRegionFinder regionFinder = new ConnectedRegionFinder();
 
+            // Determine input file name from command line args or use default
+            string inputFileName = args.Length > 0 ? args[0] : DefaultInputFileName;
+
             // Read the grid map from the input file
-            Console.WriteLine($"Reading input from: {InputFileName}");
-            var gridMap = await inputReader.ReadGridMapAsync(InputFileName);
+            Console.WriteLine($"Reading input from: {inputFileName}");
+            var gridMap = await inputReader.ReadGridMapAsync(inputFileName);
             Console.WriteLine($"Grid size: {gridMap.Rows} x {gridMap.Columns}");
 
             // Find all connected regions
