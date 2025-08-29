@@ -43,7 +43,7 @@ namespace Quadrant.Services
             ValidateDialValue(current, nameof(current));
             ValidateDialValue(target, nameof(target));
 
-            var dialRange = _configuration.MaxDialValue - _configuration.MinDialValue + 1;
+            var dialRange = _configuration.MaxDialValue - _configuration.MinDialValue + 1; //10 For this problem
 
             // Calculate cost turning right (decrementing with wrap-around)
             int right = (current - target + dialRange) % dialRange;
